@@ -6,11 +6,7 @@
 
 <script>
 
-  import PostsList from "~/components/Posts/PostsList";
-
   export default {
-    name: "index",
-    components: {PostsList},
     computed: {
       loadedPosts() {
         return this.$store.getters.loadedPosts

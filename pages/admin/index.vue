@@ -11,12 +11,9 @@
 </template>
 
 <script>
-  import PostsList from "~/components/Posts/PostsList";
-  import AppButton from "~/components/UI/AppButton";
 
   export default {
     name: "index",
-    components: {AppButton, PostsList},
     layout: 'admin',
     computed: {
       loadedPosts() {

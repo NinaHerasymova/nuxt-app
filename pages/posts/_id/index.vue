@@ -5,11 +5,11 @@
       <div class="post-details">
         <div class="post-detail">
           Updated at
-         {{loadedPost.updatedDate}}
+          {{loadedPost.updatedDate | date}}
         </div>
         <div class="post-detail">
           Author:
-         {{loadedPost.author}}
+          {{loadedPost.author}}
         </div>
 
       </div>
@@ -27,17 +27,16 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     name: "index",
     asyncData(context) {
-      return axios.get(`https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/posts/${context.params.id}.json`)
-      .then((res)=>{
+      return context.app.$axios.$get(`posts/${context.params.id}.json`)
+      .then((data) => {
         return {
-          loadedPost: res.data
+          loadedPost: data
         }
       })
-      .catch(e=>context.error(e))
+      .catch(e => context.error(e))
     }
   }
 </script>
@@ -83,6 +82,10 @@
   .post-detail {
     color: rgb(88, 88, 88);
     margin: 0 10px;
+  }
+
+  .post-thumbnail img{
+    width: 100%;
   }
 
   .post-feedback a {

@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export const state = () => {
   return {
     loadedPosts: []
@@ -21,12 +19,12 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit(vuexContext, context) {
-    return axios.get('https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
-    .then(res=>{
-      console.log(res.data)
+    return context.app.$axios.$get(`posts.json`)
+    .then(data=>{
+      console.log(data)
       const postsArray = []
-      for(const key in res.data){
-        postsArray.push({...res.data[key], id:key})
+      for(const key in data){
+        postsArray.push({...data[key], id:key})
       }
       vuexContext.commit('setPosts', postsArray)
     })
@@ -40,11 +38,11 @@ export const actions = {
       ...post,
       updatedDate: new Date()
     }
-   return axios
-    .post('https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/posts.json', createdPost
+   return context.app.$axios
+    .$post(`posts.json`, createdPost
     )
-    .then(res=>{
-      vuexContext.commit('addPost', {...createdPost, id: res.data.name})
+    .then(data=>{
+      vuexContext.commit('addPost', {...createdPost, id: data.name})
     })
     .catch(e=>console.log(e))
   },
@@ -53,8 +51,8 @@ export const actions = {
       ...post,
       updatedDate: new Date()
     }
-    return axios.put(`https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/posts/${post.id}.json`, editedPost)
-    .then(res=>{
+    return context.app.$axios.$put(`posts/${post.id}.json`, editedPost)
+    .then(data=>{
       vuexContext.commit('editPost', editedPost)
     })
     .catch((e)=>console.log('error', e))

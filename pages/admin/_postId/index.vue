@@ -8,17 +8,16 @@
 
 <script>
   import AdminPostForm from "~/components/Admin/AdminPostForm";
-  import axios from "axios";
 
   export default {
     name: "index",
     components: {AdminPostForm},
     layout: 'admin',
     asyncData(context) {
-      return axios.get(`https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/posts/${context.params.postId}.json`)
-      .then((res) => {
+      return context.app.$axios.$get(`posts/${context.params.postId}.json`)
+      .then((data) => {
         return {
-          post: {...res.data, id:context.params.postId}
+          post: {...data, id:context.params.postId}
         }
       })
       .catch(e => context.error(e))
