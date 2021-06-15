@@ -47,7 +47,6 @@
     },
     methods: {
       onSave(){
-        console.log(this.post)
         this.$emit('submit', this.editedPost)
       },
       onCancel(){

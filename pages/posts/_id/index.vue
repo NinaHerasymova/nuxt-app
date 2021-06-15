@@ -14,7 +14,7 @@
 
       </div>
       <div class="post-thumbnail">
-        <img :src="require(`~/assets/images/${loadedPost.thumbnail}.jpg`)" :alt="title">
+        <img :src="require(`~/assets/images/${loadedPost.thumbnail}.jpg`)" :alt="loadedPost.title">
       </div>
       <div class="post-content">
         <p>{{loadedPost.content}}</p>

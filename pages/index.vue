@@ -14,11 +14,12 @@
   export default {
     name: "index",
     components: {PostsList},
-   computed:{
-      loadedPosts(){
+    middleware:'log',
+    computed: {
+      loadedPosts() {
         return this.$store.getters.loadedPosts
       }
-   }
+    }
   }
 </script>
 

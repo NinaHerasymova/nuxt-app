@@ -47,16 +47,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    baseUrl: process.env.BASE_URL || 'https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/'
+    baseUrl: process.env.BASE_URL || 'https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/',
+    apiKey: 'AIzaSyBAgMpxcpMNqnlA1e1pNvOCSUtcgZBTAKA'
   },
   router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        path: '*',
-        component: resolve(__dirname, 'pages/index.vue')
-      })
-    },
-    linkActiveClass: 'active'
+   middleware: 'log',
   },
   transition: {
     name: 'page',
