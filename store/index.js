@@ -17,6 +17,9 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token
+  },
+  clearToken(state) {
+    state.token = null
   }
 }
 
@@ -73,13 +76,33 @@ export const actions = {
     })
     .then(res => {
       vuexContext.commit('setToken', res.idToken)
+      localStorage.setItem('token', res.idToken)
+      localStorage.setItem('tokenExpiration', new Date().getTime() + res.expiresIn*1000)
+      vuexContext.dispatch('setLogoutTimer', res.expiresIn*1000)
     })
     .catch(e => console.log(e))
+  },
+  setLogoutTimer(vuexContext, duration){
+    setTimeout(()=>{
+      vuexContext.commit('clearToken')
+    }, duration)
+  },
+  initAuth(vuexContext){
+    const token = localStorage.getItem('token')
+    const expirationDate = localStorage.getItem('tokenExpiration')
+
+    if(new Date() > expirationDate||!token){
+      return
+    }
+    vuexContext.commit('setToken', token)
   }
 }
 
 export const getters = {
   loadedPosts(state) {
     return state.loadedPosts
+  },
+  isAuth(state) {
+    return state.token != null
   }
 }
