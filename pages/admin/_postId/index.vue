@@ -27,7 +27,6 @@
       onSubmitted(editedPost) {
         this.$store.dispatch('editPost', editedPost)
         .then(()=>this.$router.push('/admin'))
-
       }
     }
   }

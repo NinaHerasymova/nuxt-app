@@ -1,5 +1,5 @@
 <template>
-<div class="header-container">
+<div class="header-container" data-app>
   <header class="the-header">
     <TheSideNavToggle @toggle="$emit('sidenavToggle')" />
     <div class="logo">
@@ -9,8 +9,58 @@
     <div class="navigation-items">
       <ul class="nav-list">
         <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/about">About</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>
+        <li class="nav-item">
+          <span v-if="!isAuth" @click="dialog = true">Admin Panel</span>
+          <nuxt-link v-else to="/admin">Admin Panel</nuxt-link>
+        </li>
+        <li class="nav-item">
+          <v-dialog
+            v-model="dialog"
+            width="500"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="red lighten-2"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
+                {{isAuth ? "Logout" :  "Login"}}
+              </v-btn>
+            </template>
+
+            <v-card>
+              <template v-if="isAuth">
+                <v-card-title class="text-h5 grey lighten-2">
+                  LOGOUT
+                </v-card-title>
+                <v-card-text>
+                Are you sure you want to logout?
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="onLogout"
+                  >
+                   Logout
+                  </v-btn>
+                  <v-btn
+                    color="error"
+                    text
+                    @click="dialog = false"
+                  >
+                    Cancel
+                  </v-btn>
+                </v-card-actions>
+              </template>
+              <template v-else>
+                <AuthForm/>
+              </template>
+            </v-card>
+          </v-dialog>
+        </li>
       </ul>
     </div>
   </header>
@@ -19,11 +69,30 @@
 
 <script>
 import TheSideNavToggle from "@/components/Navigation/TheSideNavToggle";
+import AuthForm from "../Admin/AuthForm";
 
 export default {
   name: "TheHeader",
   components: {
-    TheSideNavToggle
+    TheSideNavToggle,
+    AuthForm
+  },
+  data () {
+    return {
+      dialog: false,
+    }
+  },
+  computed: {
+    isAuth(){
+      return this.$store.getters.isAuth
+    }
+  },
+  methods: {
+    onLogout(){
+      this.$store.dispatch('logout');
+      this.$router.push('/')
+      this.dialog = false
+    }
   }
 };
 </script>
@@ -76,13 +145,15 @@ export default {
   padding: 0;
   margin: 0;
   display: flex;
+  align-items: center;
 }
 
 .nav-item {
   margin: 0 10px;
 }
 
-.nav-item a {
+.nav-item a, .nav-item span {
+  cursor: pointer;
   text-decoration: none;
   color: white;
 }

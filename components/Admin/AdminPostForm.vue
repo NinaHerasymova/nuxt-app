@@ -41,7 +41,8 @@
           title:'',
           thumbnail: '',
           previewText: '',
-          content: ''
+          content: '',
+          like: false
         }
       }
     },

@@ -59,7 +59,7 @@ export const actions = {
       updatedDate: new Date()
     }
 
-    return this.$axios.$put(`posts/${editedPost.id}.json?auth=${vuexContext.state.token}`, editedPost)
+    return this.$axios.$put(`posts/${editedPost.id}.json`, editedPost)
     .then(data => {
       vuexContext.commit('editPost', editedPost)
     })
@@ -105,7 +105,7 @@ export const actions = {
       .split(';')
       .find(c => c.trim().startsWith('expirationDate='))
       .split('=')[1]
-    } else {
+    } else if(process.client){
       token = localStorage.getItem('token')
       expirationDate = localStorage.getItem('tokenExpiration')
     }

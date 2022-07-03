@@ -2,7 +2,6 @@
   <div class="admin-page">
     <section class="new-post">
       <AppButton @click="$router.push('/admin/new-post')">Create post</AppButton>
-      <AppButton @click="onLogout">LogOut</AppButton>
     </section>
     <section class="existing-class">
       <h1 v-text="'Existing posts'"/>
@@ -17,12 +16,6 @@
     name: "index",
     layout: 'admin',
     middleware: ['check-auth', 'auth'],
-    methods:{
-      onLogout(){
-        this.$store.dispatch('logout');
-        this.$router.push('/admin/auth')
-      }
-    },
     computed: {
       loadedPosts() {
         return this.$store.getters.loadedPosts

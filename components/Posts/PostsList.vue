@@ -4,18 +4,8 @@
       v-for="post in posts"
       :key="post.id"
       :is-admin="isAdmin"
-      :id="post.id"
-      :title="post.title"
-      :previewText="post.previewText"
-      :thumbnail="post.thumbnail"
+      :post="post"
     />
-<!--    <PostPreview-->
-<!--      :is-admin="isAdmin"-->
-<!--      id="2"-->
-<!--      title="Hello, Richard))"-->
-<!--      previewText="preview Richard"-->
-<!--      thumbnail="corgi_1"-->
-<!--    />-->
   </section>
 </template>
 

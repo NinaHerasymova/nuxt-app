@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser')
+const axios = require('axios')
 
 export default {
+  mode: 'universal',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-app',
@@ -36,24 +38,23 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: [
+    '@nuxtjs/vuetify'
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
   ],
-  axios:{
-    baseURL: process.env.BASE_URL || 'https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/'
+  axios: {
+    baseURL: process.env.BASE_URL || 'https://nuxt-auth-eb920-default-rtdb.europe-west1.firebasedatabase.app/'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    baseUrl: process.env.BASE_URL || 'https://nuxt-app-b50bf-default-rtdb.europe-west1.firebasedatabase.app/',
-    apiKey: 'AIzaSyBAgMpxcpMNqnlA1e1pNvOCSUtcgZBTAKA'
-  },
-  router: {
-   middleware: 'log',
+    baseUrl: process.env.BASE_URL || 'https://nuxt-auth-eb920-default-rtdb.europe-west1.firebasedatabase.app/',
+    apiKey: 'AIzaSyCVjtsfZlpzQ5DwJiqsOQUvjPQXuACEcKE'
   },
   transition: {
     name: 'page',
@@ -62,6 +63,7 @@ export default {
   serverMiddleware: [
     bodyParser.json(),
     '~/api'
-  ]
+  ],
+
 
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <section class="intro">
-      <h1>Get into)</h1>
+      <h1>Cypress test project</h1>
     </section>
     <PostsList :posts="loadedPosts" :isAdmin="false"/>
   </div>
@@ -14,11 +14,10 @@
   export default {
     name: "index",
     components: {PostsList},
-    middleware:'log',
     computed: {
       loadedPosts() {
         return this.$store.getters.loadedPosts
-      }
+      },
     }
   }
 </script>
@@ -29,8 +28,8 @@
     position: relative;
     padding: 30px;
     box-sizing: border-box;
-    background-image: url('~assets/images/corgi_3.jpg');
-    background-position: center;
+    background-image: url('~assets/images/background.jpeg');
+    background-position: bottom;
     background-size: cover;
   }
 
@@ -39,14 +38,8 @@
     top: 10%;
     left: 5%;
     width: 90%;
-    font-size: 1.5rem;
-    color: black;
-    background-color: rgb(211, 211, 211);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 3px black;
-    box-sizing: border-box;
-    border: 1px solid black;
+    font-size: 3rem;
+    color: white;
   }
 
   @media (min-width: 768px) {
