@@ -6,7 +6,9 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "e2e": "cypress open --browser chrome",
+    "e2e:silent": "cypress run"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
@@ -19,6 +21,7 @@
     "vue-router": "^3.5.1"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.3"
+    "@nuxtjs/vuetify": "^1.12.3",
+    "cypress": "^10.3.0"
   }
 }

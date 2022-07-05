@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <section class="intro">
-      <h1>Cypress test project</h1>
+      <h1 data-cy="title">Cypress test project</h1>
     </section>
     <PostsList :posts="loadedPosts" :isAdmin="false"/>
   </div>

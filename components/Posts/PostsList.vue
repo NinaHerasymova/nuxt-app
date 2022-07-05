@@ -5,6 +5,7 @@
       :key="post.id"
       :is-admin="isAdmin"
       :post="post"
+      data-cy="post-preview"
     />
   </section>
 </template>

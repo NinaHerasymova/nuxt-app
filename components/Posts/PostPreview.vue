@@ -1,11 +1,12 @@
 <template>
   <article class="post-preview">
     <v-btn
-      :class="['post-like', isLiked && 'post-like--liked']"
+      class="post-like"
       fab
       light
       small
       @click="toggleLike"
+      data-cy="post-like"
     >
       <v-icon v-if="isLiked" color="#E53935">
         mdi-heart
@@ -15,12 +16,12 @@
       </v-icon>
     </v-btn>
     <nuxt-link :to="postLink">
-      <div class="post-thumbnail">
+      <div class="post-thumbnail"  data-cy="post-img">
         <img :src="require(`~/assets/images/${post.thumbnail}.jpg`)" :alt="post.title">
       </div>
       <div class="post-content">
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.previewText }}</p>
+        <h1 data-cy="post-title">{{ post.title }}</h1>
+        <p data-cy="post-content">{{ post.previewText }}</p>
       </div>
     </nuxt-link>
   </article>
@@ -41,12 +42,12 @@ export default {
       required: true
     }
   },
-  data(){
+  data() {
     return {
       isLiked: false
     }
   },
-  created(){
+  created() {
     this.isLiked = this.post.like
   },
   computed: {
@@ -55,14 +56,20 @@ export default {
     }
   },
   methods: {
-    toggleLike() {
-      this.isLiked = !this.isLiked
+    async toggleLike() {
       const post = {
         ...this.post,
-        like: this.isLiked
+        like: !this.post.like
       }
-      console.log(this.post)
-      this.$store.dispatch('editPost', post)
+      try{
+        const newPost = await this.$axios.$put(`posts/${post.id}.json`, post)
+        this.isLiked = newPost.like
+        this.$store.commit('editPost', newPost)
+      } catch(e){
+        console.error(e)
+      }
+
+
     }
   }
 }
@@ -120,6 +127,7 @@ a:hover .post-content,
 a:active .post-content {
   background-color: #ccc;
 }
+
 .v-btn::before {
   background-color: #fff;
 }
