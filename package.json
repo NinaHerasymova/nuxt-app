@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.3",
-    "cypress": "^10.3.0"
+    "cypress": "^10.3.0",
+    "dotenv": "^16.0.1"
   }
 }

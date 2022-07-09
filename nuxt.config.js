@@ -53,8 +53,8 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    baseUrl: process.env.BASE_URL || 'https://nuxt-auth-eb920-default-rtdb.europe-west1.firebasedatabase.app/',
-    apiKey: 'AIzaSyCVjtsfZlpzQ5DwJiqsOQUvjPQXuACEcKE'
+    baseUrl: process.env.BASE_URL,
+    apiKey: process.env.API_KEY
   },
   transition: {
     name: 'page',

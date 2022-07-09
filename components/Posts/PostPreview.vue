@@ -20,7 +20,7 @@
         <img :src="require(`~/assets/images/${post.thumbnail}.jpg`)" :alt="post.title">
       </div>
       <div class="post-content">
-        <h1 data-cy="post-title">{{ post.title }}</h1>
+        <h2 data-cy="post-title">{{ post.title }}</h2>
         <p data-cy="post-content">{{ post.previewText }}</p>
       </div>
     </nuxt-link>

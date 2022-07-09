@@ -82,7 +82,6 @@ export const actions = {
       localStorage.setItem('tokenExpiration', new Date().getTime() + Number.parseInt(res.expiresIn)*1000)
       Cookie.set('jwt', res.idToken)
       Cookie.set('expirationDate', new Date().getTime() + Number.parseInt(res.expiresIn)*1000)
-      return this.$axios.$post('http://localhost:3000/api/track-data', {data: 'Authenthjl'})
     })
     .catch(e => console.log(e))
   },
@@ -114,7 +113,6 @@ export const actions = {
       vuexContext.dispatch('logout')
       return
     }
-
     vuexContext.commit('setToken', token)
   },
   logout(vuexContext){

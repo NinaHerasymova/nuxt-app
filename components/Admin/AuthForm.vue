@@ -5,17 +5,20 @@
     lazy-validation
   >
     <v-text-field
+      data-cy="email"
       v-model="email"
       label="E-mail"
       required
     ></v-text-field>
     <v-text-field
+      data-cy="password"
       v-model="password"
       label="Password"
       required
       type="password"
     ></v-text-field>
     <v-btn
+      data-cy="submit"
       color="primary"
       text
       type="submit">

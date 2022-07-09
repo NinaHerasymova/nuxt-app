@@ -1,5 +1,7 @@
 const { defineConfig } = require("cypress");
 
+require('dotenv').config()
+
 module.exports = defineConfig({
   e2e: {
     baseUrl: "http://localhost:3000",
@@ -10,6 +12,9 @@ module.exports = defineConfig({
   },
   env: {
     homePage: "http://localhost:3000",
-    apiUrl: "https://nuxt-auth-eb920-default-rtdb.europe-west1.firebasedatabase.app/posts/**"
+    // testing auth
+    googleRefreshToken: process.env.REFRESH_TOKEN,
+    googleClientId: process.env.APP_GOOGLE_CLIENTID,
+    googleClientSecret: process.env.APP_GOOGLE_CLIENT_SECRET
   },
 });

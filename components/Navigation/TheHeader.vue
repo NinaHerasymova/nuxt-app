@@ -9,17 +9,19 @@
     <div class="navigation-items">
       <ul class="nav-list">
         <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
-        <li class="nav-item">
+        <li class="nav-item" data-cy="admin">
           <span v-if="!isAuth" @click="dialog = true">Admin Panel</span>
           <nuxt-link v-else to="/admin">Admin Panel</nuxt-link>
         </li>
         <li class="nav-item">
           <v-dialog
+            class="test"
             v-model="dialog"
             width="500"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
+                data-cy="logButton"
                 color="red lighten-2"
                 dark
                 v-bind="attrs"
@@ -29,17 +31,18 @@
               </v-btn>
             </template>
 
-            <v-card>
+            <v-card data-cy="auth-modal">
               <template v-if="isAuth">
                 <v-card-title class="text-h5 grey lighten-2">
                   LOGOUT
                 </v-card-title>
-                <v-card-text>
+                <v-card-text data-cy="logout-text">
                 Are you sure you want to logout?
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
+                    data-cy="logout-button"
                     color="primary"
                     text
                     @click="onLogout"
