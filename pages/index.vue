@@ -2,6 +2,11 @@
   <div class="home-page">
     <section class="intro">
       <h1 data-cy="title">Cypress test project</h1>
+      <div class="notification" v-show="showBanner" data-cy="banner">
+        <span>Annoying Notification</span>
+        <span class="notification-close" @click="showBanner = false">X</span>
+        <span>{{ timeNow }}</span>
+      </div>
     </section>
     <PostsList :posts="loadedPosts" :isAdmin="false"/>
   </div>
@@ -14,10 +19,21 @@
   export default {
     name: "index",
     components: {PostsList},
+    data(){
+      return {
+        showBanner: true
+      }
+    },
+    mounted(){
+      setTimeout(()=>this.showBanner = false, 30000)
+    },
     computed: {
       loadedPosts() {
         return this.$store.getters.loadedPosts
       },
+      timeNow(){
+        return Date.now()
+      }
     }
   }
 </script>
@@ -57,5 +73,28 @@
     justify-content: center;
   }
 
+  .notification {
+    z-index: 2;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    bottom: -50%;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #00ff96;
+    box-shadow: 0 2px 15px #ccc;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  .notification-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
 
 </style>
