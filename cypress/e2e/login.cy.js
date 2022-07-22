@@ -6,8 +6,7 @@ context('Testing auth', () => {
 
   it('Test admin page route success', () => {
     cy.get('[data-cy="admin"]').as('adminLink')
-    cy.get('@adminLink').click()
-    cy.wait(500)
+    cy.get('@adminLink').click().wait(500)
     cy.get('[data-cy="auth-modal"]').as('authModal')
     cy.get('@authModal').should('be.visible')
     cy.get('@authModal').find(' [data-cy="email"]')
